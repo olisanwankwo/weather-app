@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  
   data() {
     return {
       data: null,
@@ -56,10 +57,10 @@ export default {
         this.showEmptyQuery = true;
         return;
       }
-
+      const API_KEY = import.meta.env.API_KEY;
       this.loading = true;
       try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.searchQuery}&appid=2a99581e7c1dba2a8f153eb25d78430f&units=metrics`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.searchQuery}&appid=${API_KEY}&units=metrics`);
         if (response.ok) {
           this.data = await response.json();
           this.showErrorMessage = false;
