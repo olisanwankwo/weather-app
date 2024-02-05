@@ -34,8 +34,9 @@
 </template>
 
 <script>
-export default {
-  
+
+
+export default { 
   data() {
     return {
       data: null,
@@ -45,22 +46,26 @@ export default {
       showEmptyQuery: false,
     };
   },
+
+
+  
   watch: {
     searchQuery() {
       this.showErrorMessage = false;
       this.showEmptyQuery = false;
     },
   },
+
   methods: {
     async searchWeather() {
       if (this.searchQuery.trim() === '') {
         this.showEmptyQuery = true;
         return;
       }
-      const API_KEY = import.meta.env.API_KEY;
+
       this.loading = true;
       try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.searchQuery}&appid=${API_KEY}&units=metrics`);
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.searchQuery}&appid=${import.meta.env.VITE_API_KEY}&units=metrics`);
         if (response.ok) {
           this.data = await response.json();
           this.showErrorMessage = false;
@@ -77,7 +82,10 @@ export default {
     convertKelvinToCelsius(kelvin) {
       return (kelvin - 273.15).toFixed(2);
     },
+    
   },
+
+  
 };
 </script>
 
